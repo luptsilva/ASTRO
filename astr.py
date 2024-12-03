@@ -1,3 +1,5 @@
+# Editando arquivo
+
 from astroquery.ipac.ned import Ned
 import pandas as pd
 from query import hyperleda
