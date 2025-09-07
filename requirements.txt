@@ -1,4 +1,9 @@
-requests
 pandas
 beautifulsoup4
 selenium
+astropy
+pytest
+requests
+astroquery
+numpy
+astropy_sphinx_theme
