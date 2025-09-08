@@ -1,4 +1,4 @@
-# 🌌 Projeto de Coleta e Unificação de Dados de Galáxias
+# 🌌 Novas técnicas de síntese espectral espacialmente resolvida
 
 **Autora:** Luiza Pinheiro da Silva  
 **Período de produção:** 01/09/2024 - 30/08/2025  
