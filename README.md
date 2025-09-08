@@ -80,7 +80,7 @@ tabelas/galaxy_infos_merged.csv
 
 ### 1. Clone o repositório
 ```bash
-git clone <seu-repo>
+git clone https://github.com/luptsilva/ASTRO.git
 cd ASTRO
 ```
 
