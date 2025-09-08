@@ -12,11 +12,11 @@ galáxias a partir de diferentes fontes astronômicas:
 Os dados extraídos incluem:
 
 - Posição em coordenadas galácticas (longitude lon e latitude lat)
-- Velocidade radial (v)
-- Parâmetros morfológicos (logd25, logr25, pa)
-- Distância estimada em megaparsecs (mpc, quando disponível)
+- Velocidade radial (V_r [Km/s])
+- Parâmetros morfológicos (logd25, logr25, PA [Degree])
+- Distância estimada em megaparsecs (d [Mpc], quando disponível)
 
-Após coletar as informações, o script gera arquivos CSV com os resultados
+Após coletar as informações, o script gera arquivos CSV (Comma-Separeted Values) com os resultados
 de cada método e um arquivo final mesclado (galaxy_infos_merged.csv)
 seguindo uma ordem de prioridade.
 """
@@ -47,10 +47,10 @@ def get_infos_hyperleda(names):
     Obtém informações de galáxias diretamente do site HyperLeda via scraping.
 
     Para cada galáxia, busca:
-        - Velocidade radial (v)
+        - Velocidade radial (V_r [Km/s])
         - logd25 (tamanho do eixo maior em log)
         - logr25 (razão de eixos em log)
-        - pa (ângulo de posição)
+        - PA (ângulo de posição)
         - Coordenadas galácticas (lon, lat)
 
     Args:
@@ -119,8 +119,8 @@ def get_infos_ned(names):
 
     Para cada galáxia, busca:
         - Coordenadas galácticas (lon, lat)
-        - Velocidade radial (v)
-        - Distância em Mpc (mpc)
+        - Velocidade radial (V_r [Km/s])
+        - Distância em Mpc (d [Mpc])
 
     Args:
         names (list[str]): Lista de nomes de galáxias.
@@ -182,8 +182,8 @@ def get_infos_query_hyperleda(names):
 
     Para cada galáxia, busca:
         - Coordenadas galácticas (lon, lat)
-        - Velocidade radial (v)
-        - logd25, logr25, pa
+        - Velocidade radial (V_r [Km/s])
+        - logd25, logr25, PA [Degree]
 
     Args:
         names (list[str]): Lista de nomes de galáxias.

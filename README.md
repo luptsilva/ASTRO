@@ -5,7 +5,7 @@
 
 ---
 
-## 📖 Descrição
+## Descrição
 
 Este projeto realiza a **coleta, organização e unificação de informações astronômicas sobre galáxias** a partir de diferentes fontes públicas:
 
@@ -20,21 +20,21 @@ O resultado é um conjunto de arquivos CSV com as informações de cada fonte e 
 
 ---
 
-## 🔭 Informações coletadas
+## Informações coletadas
 
 As propriedades das galáxias extraídas (quando disponíveis) incluem:
 
 - **Posição em coordenadas galácticas** (`lon`, `lat`)
-- **Velocidade radial** (`v`)
+- **Velocidade radial** (`V_r [Km/s]`)
 - **Parâmetros morfológicos**:
   - `logd25` → tamanho do eixo maior (log)
   - `logr25` → razão de eixos (log)
-  - `pa` → ângulo de posição
-- **Distância estimada** em megaparsecs (`mpc`)
+  - `PA [Degree]` → ângulo de posição
+- **Distância estimada** em megaparsecs (`d [Mpc]`)
 
 ---
 
-## 📂 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```bash
 ASTRO/
@@ -52,7 +52,7 @@ ASTRO/
 │── README.md # Este arquivo
 ```
 
-## ⚙️ Funcionamento
+## Funcionamento
 
 ### 1. Entrada
 O script lê a lista de nomes de galáxias a partir de:
@@ -76,7 +76,7 @@ Os arquivos individuais são mesclados no arquivo:
 tabelas/galaxy_infos_merged.csv
 ```
 
-## 🚀 Como executar
+## Como executar
 
 ### 1. Clone o repositório
 ```bash
@@ -125,7 +125,7 @@ O script gera automaticamente os seguintes arquivos CSV na pasta tabelas/:
     - `astropy`, `astroquery`
     - `query` (biblioteca auxiliar fornecida)
 
-## 📌 Observações
+## Observações
 
 - O scraping do NED depende do Selenium + ChromeDriver configurado.
 - O tempo de execução pode ser relativamente longo dependendo da lista de galáxias.
