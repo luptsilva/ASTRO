@@ -1,6 +1,6 @@
 """
-Projeto: 
-Data de produção: 30/08/2024 - 30/08/2025
+Projeto: Novas técnicas de síntese espectral espacialmente resolvida
+Data de produção: 01/09/2024 - 30/08/2025
 Autora: Luiza Pinheiro da Silva
 
 Este script realiza a coleta e unificação de informações sobre
