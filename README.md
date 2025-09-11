@@ -7,16 +7,16 @@
 
 ## Descrição
 
-Este projeto realiza a **coleta, organização e unificação de informações astronômicas sobre galáxias** a partir de diferentes fontes públicas:
+Este projeto realiza a **coleta, organização e unificação de informações astronômicas sobre galáxias** a partir de sites como:
 
 - **HyperLeda**
   - via *scraping* em HTML  
   - via biblioteca `query`
 - **NED (NASA/IPAC Extragalactic Database)**
-  - via *scraping* dinâmico com Selenium  
+  - via *scraping* com Selenium  
   - via `astroquery`
 
-O resultado é um conjunto de arquivos CSV com as informações de cada fonte e um **arquivo final mesclado** (`galaxy_infos_merged.csv`) consolidando os dados segundo prioridades definidas.
+O resultado é um conjunto de arquivos CSV com as informações de cada fonte e um **arquivo final mesclado** (`galaxy_infos_merged.csv`) consolidando os dados dos arquivos anteriores.
 
 ---
 
@@ -27,8 +27,8 @@ As propriedades das galáxias extraídas (quando disponíveis) incluem:
 - **Posição em coordenadas galácticas** (`lon`, `lat`)
 - **Velocidade radial** (`V_r [Km/s]`)
 - **Parâmetros morfológicos**:
-  - `logd25` → tamanho do eixo maior (log)
-  - `logr25` → razão de eixos (log)
+  - `logd25` → tamanho do eixo maior
+  - `logr25` → razão de eixos
   - `PA [Degree]` → ângulo de posição
 - **Distância estimada** em megaparsecs (`d [Mpc]`)
 
@@ -62,7 +62,7 @@ tabelas/galaxy.csv
 ```
 
 ## 2. Coleta
-Para cada galáxia, o script busca informações em **quatro fontes**:
+Para cada galáxia, o script busca informações em **quatro formas distintas**:
 
 1. Scraping direto do **HyperLeda**  
 2. Biblioteca `query` do **HyperLeda**  
@@ -78,13 +78,13 @@ tabelas/galaxy_infos_merged.csv
 
 ## Como executar
 
-### 1. Clone o repositório
+### 1. É preciso clonar o repositório do GitHub
 ```bash
 git clone https://github.com/luptsilva/ASTRO.git
 cd ASTRO
 ```
 
-### Crie e ative um ambiente virtual (opcional, mas recomendado)
+### É recomendado criar um ambiente virtual
 
 ```bash
 python -m venv venv
@@ -98,7 +98,7 @@ venv\Scripts\activate     # Windows
 pip install -r requirements.txt
 ```
 
-### Execute o script
+### Agora é só executar o script
 
 ```bash
 python main.py
