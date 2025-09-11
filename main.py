@@ -3,21 +3,21 @@ Projeto: Novas técnicas de síntese espectral espacialmente resolvida
 Data de produção: 01/09/2024 - 30/08/2025
 Autora: Luiza Pinheiro da Silva
 
-Este script realiza a coleta e unificação de informações sobre
+Este script realiza a coleta e unificação de informações sobre 
 galáxias a partir de diferentes fontes astronômicas:
 
--> HyperLeda (via scraping HTML e via biblioteca query)
--> NED - NASA/IPAC Extragalactic Database (via scraping com Selenium e via astroquery)
+-> HyperLeda (via scraping HTML e biblioteca query)
+-> NED - NASA/IPAC Extragalactic Database (via scraping com Selenium e astroquery)
+
 
 Os dados extraídos incluem:
-
 - Posição em coordenadas galácticas (longitude lon e latitude lat)
 - Velocidade radial (V_r [Km/s])
 - Parâmetros morfológicos (logd25, logr25, PA [Degree])
 - Distância estimada em megaparsecs (d [Mpc], quando disponível)
 
 Após coletar as informações, o script gera arquivos CSV (Comma-Separeted Values) com os resultados
-de cada método e um arquivo final mesclado (galaxy_infos_merged.csv)
+de cada método e um arquivo final mesclado (galaxy_infos_merged.csv) 
 seguindo uma ordem de prioridade.
 """
 
@@ -44,12 +44,12 @@ import astropy.units as u
 
 def get_infos_hyperleda(names):
     """
-    Obtém informações de galáxias diretamente do site HyperLeda via scraping.
+    Obtém informações de galáxias direto do site HyperLeda via scraping.
 
     Para cada galáxia, busca:
         - Velocidade radial (V_r [Km/s])
-        - logd25 (tamanho do eixo maior em log)
-        - logr25 (razão de eixos em log)
+        - logd25 (tamanho do eixo maior)
+        - logr25 (razão de eixos)
         - PA (ângulo de posição)
         - Coordenadas galácticas (lon, lat)
 
@@ -93,7 +93,7 @@ def get_infos_hyperleda(names):
                     infos[row_name] = columns[1].text.strip().split()[0]
                     break
         
-        # Agora vamos pegar a lat e a lon da tabela um pouco mais pra cima
+        # Agora vamos pegar a lat e a lon da tabela que está acima desta
         table = tables[3]
         rows = table.find_all('tr')
 
@@ -164,7 +164,7 @@ def get_infos_ned(names):
         chrome_options.add_argument("--disable-dev-shm-usage")
         driver = webdriver.Chrome(options=chrome_options)
         driver.get(f"https://ned.ipac.caltech.edu/byname?objname={name}")
-        time.sleep(10) # isso é necessário para dar tempo de a tabela atualizar
+        time.sleep(10) # Necessário para dar tempo da tabela atualizar
 
         infos = {"Name": name}
         for id in ids:
@@ -249,7 +249,7 @@ def get_infos_query_ned(names):
         }
         all_infos.append(infos)
 
-    # exportar pra CSV
+    # exporta pra CSV
     columns = ["Name", "lon", "lat", "v"]
     df = pd.DataFrame(all_infos, columns=columns)
     df.to_csv("tabelas/galaxy_infos_query_ned.csv", index=False)
@@ -273,19 +273,19 @@ def merge_tables_with_priority(file_paths, final_columns, output_path="galaxy_in
     dfs = []
     for path in file_paths:
         df = pd.read_csv(path)
-        # Garantir que todas as colunas existam
+        # Garante que todas as colunas existam
         for col in final_columns:
             if col not in df.columns:
                 df[col] = None
         dfs.append(df[final_columns])
     
-    # Concatenar na ordem de prioridade
+    # Concatena na ordem de prioridade
     merged = pd.concat(dfs)
     
-    # Resolver duplicatas mantendo a primeira ocorrência (maior prioridade)
+    # Resolve duplicatas mantendo a primeira ocorrência (maior prioridade)
     merged = merged.groupby("Name", as_index=False).first()
     
-    # Salvar CSV
+    # Salva o csv
     merged.to_csv(output_path, index=False)
     
     return merged
@@ -293,9 +293,8 @@ def merge_tables_with_priority(file_paths, final_columns, output_path="galaxy_in
 
 def main():
     """
-    Função principal do script.
+    Função principal do script:
 
-    Etapas:
         1. Lê lista de galáxias de `tabelas/galaxy.csv`.
         2. Obtém informações via:
             - Scraping do HyperLeda
@@ -306,7 +305,7 @@ def main():
            respeitando a ordem de prioridade.
 
     Output:
-        Imprime no console as primeiras linhas do DataFrame final.
+        Imprime as primeiras linhas do DataFrame final.
     """
     # Site NASA -> https://ned.ipac.caltech.edu/
     # Site OSU Institut Pytheas -> http://atlas.obs-hp.fr/hyperleda/
@@ -324,10 +323,11 @@ def main():
     get_infos_query_ned(names)
 
     file_paths = [
-        "tabelas/galaxy_infos_query_hyperleda.csv",  # prioridade 1
-        "tabelas/galaxy_infos_hyperleda.csv",        # prioridade 2
-        "tabelas/galaxy_infos_ned.csv",              # prioridade 3
-        "tabelas/galaxy_infos_query_ned.csv"         # prioridade 4
+        # Lista de prioridade
+        "tabelas/galaxy_infos_query_hyperleda.csv",  # 1
+        "tabelas/galaxy_infos_hyperleda.csv",        # 2
+        "tabelas/galaxy_infos_ned.csv",              # 3
+        "tabelas/galaxy_infos_query_ned.csv"         # 4
     ]
     
     final_columns = ["Name", "lon", "lat", "v", "logd25", "logr25", "pa", "mpc"]
